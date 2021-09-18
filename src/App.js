@@ -13,16 +13,21 @@ const themes = {
   },
 };
 const ThemeContext = createContext();
-
 export default function App() {
+  // penggunaan useState1
   const [values, setValues] = useState({
     firstName: '',
     lastName: '',
     email: '',
   });
+
+  // penggunaan useState2
   const [submitted, setSubmitted] = useState(false);
+
+  // penggunaan useState3
   const [valid, setValid] = useState (false);
 
+// penggunaan useState4
   const [valueTheme, setValueTheme] = useState(themes.light);
 
   const handleFirstNameInputChange = (event) => {
