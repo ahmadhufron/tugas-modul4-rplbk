@@ -1,6 +1,8 @@
 import React from "react";
 import "./index.css";
+import Header from "./Header";
 import { useState, useEffect, createContext } from "react";
+
 
 const themes = {
   light: {
@@ -12,6 +14,7 @@ const themes = {
     text: "#fff",
   },
 };
+export const AppsContext = React.createContext({});
 const ThemeContext = createContext();
 export default function App() {
   // penggunaan useState1
@@ -20,6 +23,7 @@ export default function App() {
     lastName: '',
     email: '',
   });
+  const [apps] = useState({})
 
   // penggunaan useState2
   const [submitted, setSubmitted] = useState(false);
@@ -61,8 +65,17 @@ export default function App() {
     }
     setSubmitted(true);
   }
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    console.log(`Terjadi perubahan value menjadi ${count}`);
+  }, [count]);
   return (
+    
     <ThemeContext.Provider value={valueTheme}>
+          <AppsContext.Provider value={{ apps }}>
+      <Header />
+    </AppsContext.Provider>
     <div class="form-container" style={{ backgroundColor: valueTheme.background }}>
       <form class="register-form" onSubmit={handleSubmit}>
         {/* Uncomment the next line to show the success message */}
@@ -111,9 +124,16 @@ export default function App() {
           }>
           Change Color 
         </button>
-        
       </form>
+
     </div>
+    <br></br>
+    <div>
+      <center>{count}</center>
+      <br />
+      <button class="button" conClick={() => setCount(count + 1)}>Tambah</button>
+    </div>
+
     </ThemeContext.Provider>
   );
 }
